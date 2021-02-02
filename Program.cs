@@ -41,7 +41,7 @@ namespace QRCodeBot
                          * for local check
                         string path = "D:/111.jpg";
                         bitmap.Save(path);
-                        */
+                        *///
 
                         using (MemoryStream ms = new MemoryStream())
                         {

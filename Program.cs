@@ -20,41 +20,35 @@ namespace QRCodeBot
             telegramBot.OnMessage += (e, arg) =>
             {
                 string txt = "";
-               
+
                 try
                 {
                     if (arg.Message.Text == "/start")
                     {
                         txt = "Hi. Send photo or text and i will turn it into QR code";  
                     }
-                    else
+                else
+                {
+                    string textToConvert = "ERROR: QR didn't generated";
+                    textToConvert = arg.Message.Text;
+                    QRCodeGenerator qRCode = new QRCodeGenerator();
+                    QRCodeData data = qRCode.CreateQrCode(textToConvert, QRCodeGenerator.ECCLevel.Q);
+                    QRCode code = new QRCode(data);
+
+                    Bitmap bitmap = new Bitmap(code.GetGraphic(10));
+
+                    using (MemoryStream ms = new MemoryStream())
                     {
-                        string textToConvert = "ERROR: QR didn't generated";
-                        textToConvert = arg.Message.Text;
-                        QRCodeGenerator qRCode = new QRCodeGenerator();
-                        QRCodeData data = qRCode.CreateQrCode(textToConvert, QRCodeGenerator.ECCLevel.Q);
-                        QRCode code = new QRCode(data);
+                        bitmap.Save(ms, ImageFormat.Png);
 
-                        Bitmap bitmap = new Bitmap(code.GetGraphic(10));
-
-                        /*
-                         * for local check
-                        string path = "D:/111.jpg";
-                        bitmap.Save(path);
-                        *///
-
-                        using (MemoryStream ms = new MemoryStream())
-                        {
-                            bitmap.Save(ms, ImageFormat.Png);
-
-                            ms.Position = 0;
-                            telegramBot.SendPhotoAsync(
-                            chatId: arg.Message.Chat.Id,
-                            ms
-                            );
-                        }
-
+                        ms.Position = 0;
+                        telegramBot.SendPhotoAsync(
+                        chatId: arg.Message.Chat.Id,
+                        ms
+                        );
                     }
+   
+                }
                 }
                 catch (Exception)
                 {

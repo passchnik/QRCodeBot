@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "QRCodeBot": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

@@ -27,28 +27,28 @@ namespace QRCodeBot
                     {
                         txt = "Hi. Send photo or text and i will turn it into QR code";  
                     }
-                else
-                {
-                    string textToConvert = "ERROR: QR didn't generated";
-                    textToConvert = arg.Message.Text;
-                    QRCodeGenerator qRCode = new QRCodeGenerator();
-                    QRCodeData data = qRCode.CreateQrCode(textToConvert, QRCodeGenerator.ECCLevel.Q);
-                    QRCode code = new QRCode(data);
-
-                    Bitmap bitmap = new Bitmap(code.GetGraphic(10));
-
-                    using (MemoryStream ms = new MemoryStream())
+                    else
                     {
-                        bitmap.Save(ms, ImageFormat.Png);
+                        string textToConvert = "ERROR: QR didn't generated";
+                        textToConvert = arg.Message.Text;
+                        QRCodeGenerator qRCode = new QRCodeGenerator();
+                        QRCodeData data = qRCode.CreateQrCode(textToConvert, QRCodeGenerator.ECCLevel.Q);
+                        QRCode code = new QRCode(data);
 
-                        ms.Position = 0;
-                        telegramBot.SendPhotoAsync(
-                        chatId: arg.Message.Chat.Id,
-                        ms
-                        );
-                    }
+                        Bitmap bitmap = new Bitmap(code.GetGraphic(10));
+
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            bitmap.Save(ms, ImageFormat.Png);
+
+                            ms.Position = 0;
+                            telegramBot.SendPhotoAsync(
+                            chatId: arg.Message.Chat.Id,
+                            ms
+                            );
+                        }
    
-                }
+                    }
                 }
                 catch (Exception)
                 {

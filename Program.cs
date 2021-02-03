@@ -15,7 +15,6 @@ namespace QRCodeBot
            
             TelegramBotClient telegramBot = new TelegramBotClient(Startup.token);
 
-            Console.WriteLine($"{telegramBot.GetMeAsync().Result.Username} started");
 
             telegramBot.OnMessage += (e, arg) =>
             {
@@ -66,6 +65,9 @@ namespace QRCodeBot
             };
 
             telegramBot.StartReceiving();
+
+            Console.WriteLine($"{telegramBot.GetMeAsync().Result.Username} started");
+
 
             Console.ReadLine();
 

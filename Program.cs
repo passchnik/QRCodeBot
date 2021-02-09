@@ -45,8 +45,10 @@ namespace QRCodeBot
                             chatId: arg.Message.Chat.Id,
                             ms
                             );
+
+                            ms.Close();
                         }
-   
+
                     }
                 }
                 catch (Exception)
@@ -66,7 +68,7 @@ namespace QRCodeBot
 
             telegramBot.StartReceiving();
 
-            Console.WriteLine($"{telegramBot.GetMeAsync().Result.Username} started");
+           // Console.WriteLine($"{telegramBot.GetMeAsync().Result.Username} started");
 
 
             Console.ReadLine();

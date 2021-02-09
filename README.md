@@ -1,6 +1,6 @@
 # QRCodeBot 
 
-Telegram bot for generating QR 
+Telegram bot for generating QR. 
 Used API:
 - QRCoder
 - Telegram.Bot

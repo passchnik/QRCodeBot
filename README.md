@@ -6,3 +6,5 @@ Used API:
 - Telegram.Bot
 
 To work with this bot, you need to create a static class Startup.cs and put your Telegram uniq token into it. 
+
+This bot in Telegram: @GenerateQR_Bot
